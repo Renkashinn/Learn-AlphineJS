@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Belajar Alpine.js</title>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body>
+    <section
+      x-data="{
+      greeting: 'Hello World',
+      boldText: '<strong>Belajar Alpine.js</strong>',
+      get formattedGreeting() {
+        return this.greeting.toUpperCase();
+      }
+    }"
+    >
+      <p
+        x-text="greeting"
+        x-ref="greet"
+      ></p>
+      <p
+        x-html="formattedGreeting"
+        x-ref="formatted"
+      ></p>
+      <button @click="check">Cek Value Ref</button>
+      <p x-text="boldText"></p>
+      <p x-html="boldText"></p>
+      <hr />
+      <input
+        type="text"
+        x-model.debounce.500ms="greeting"
+      />
+    </section>
+    <script>
+      function check() {
+        let elGreet = this.$refs.greet.innerHTML;
+        let elFormatted = this.$refs.formatted;
+        console.log(elGreet, elFormatted);
+      }
+    </script>
+  </body>
+</html>
